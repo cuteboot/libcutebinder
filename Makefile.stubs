@@ -1,0 +1,14 @@
+
+all: powermanager/IPowerManager.h schedulingpolicyservice/ISchedulingPolicyService.h
+
+powermanager/IPowerManager.h: $(ANDROID_BUILD_TOP)/frameworks/base/core/java/android/os/IPowerManager.aidl
+	mkdir -p powermanager
+	$(CUTEBOOT_BUILD_TOP)/bin/aidl_cpp -I$(ANDROID_BUILD_TOP)/frameworks/base/core/java $(ANDROID_BUILD_TOP)/frameworks/base/core/java/android/os/IPowerManager.aidl powermanager
+	# No parceable support
+	sed -i s/WorkSource/int/g powermanager/*.cpp powermanager/*.h
+
+schedulingpolicyservice/ISchedulingPolicyService.h: $(ANDROID_BUILD_TOP)/frameworks/base/core/java/android/os/ISchedulingPolicyService.aidl
+	mkdir -p schedulingpolicyservice
+	$(CUTEBOOT_BUILD_TOP)/bin/aidl_cpp -I$(ANDROID_BUILD_TOP)/frameworks/base/core/java $(ANDROID_BUILD_TOP)/frameworks/base/core/java/android/os/ISchedulingPolicyService.aidl schedulingpolicyservice
+
+

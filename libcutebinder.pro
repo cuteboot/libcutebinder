@@ -6,9 +6,13 @@ LIBS += -lcutils -lbinder -lutils
 
 INSTALL_HEADERS += powermanager/IPowerManager.h schedulingpolicyservice/ISchedulingPolicyService.h
 
-headers.files += $$INSTALL_HEADERS
-headers.path += $$[QT_INSTALL_HEADERS]
+powerheaders.files += powermanager/IPowerManager.h 
+powerheaders.path += $$[QT_INSTALL_HEADERS]/powermanager
+
+schedheaders.files += schedulingpolicyservice/ISchedulingPolicyService.h 
+schedheaders.path += $$[QT_INSTALL_HEADERS]/schedulingpolicyservice
 
 target.path += $$[QT_INSTALL_LIBS]
-INSTALLS += target headers
+INSTALLS += target powerheaders schedheaders
+
 
